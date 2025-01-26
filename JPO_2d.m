@@ -536,8 +536,9 @@ if perform(org,'Melt_param')
  
 						%Source correction parameter
                   corrected_depth(i) =  -(abs_zgl + zstar(i)); %Depth should be negative
-						DTFDP = -0.0743; %dT_{f}/dP for fw, degree/MPa, Millero (1978)
-                  T_melting_corr(i) = DTFDP*(1028*9.81*abs(corrected_depth(i))*(10^-6)-0.1);
+						
+                  T_melting_corr(i) = ( 273.15*exp( -0.00027196*( 1028*9.81*abs(corrected_depth(i))*10^-6 - 0.1) ) ) - 273.15
+    
 						Tf_source(i) = T_melting_corr(i) - (lam2 + lam3*(corrected_depth(i))); % Thermal forcing defined at the virtual source location
 
                   Ycd = mean(dist_dis_temp2(md.mesh.elements),2); %coordinate x on which the parameterization is based on
